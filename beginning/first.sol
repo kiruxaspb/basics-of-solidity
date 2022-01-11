@@ -2,13 +2,13 @@
 pragma solidity ^0.8.11;
 
 contract Storage {
-    uint Data;
+    string strData;
 
-    function set(uint x) public {
-        Data = x;
+    function set_str(string memory _strData) public {
+        strData = _strData;
     }
 
-    function get() public view returns (uint) {
-        return Data;
+    function get_str() public view returns(string memory) {
+        return strData;
     }
 }
