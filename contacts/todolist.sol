@@ -20,6 +20,11 @@ contract TodoList {
     }
 
 
+    function removeTask(uint _index) external {
+        delete todos[_index];
+    }
+
+
     function updateText(uint _index, string calldata _text) external {
             todos[_index].text = _text;
             // todo.text = _text;
