@@ -4,11 +4,11 @@ pragma solidity ^0.8.11;
 contract first {
     string public name;
 
-    constructor(string memory _name) public {
+    constructor(string memory _name) {
         name = _name;
     }
 }
 
 contract second is first {
-    constructor(string memory _name) first(_name) public {}
+    constructor(string memory _name) first(_name) {}
 }
