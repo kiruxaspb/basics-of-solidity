@@ -10,7 +10,7 @@ contract IfElse {
         } else {
             return 3;
         }
-
+    }
         /*
         if (_x < 10) {
             return 1;
@@ -25,7 +25,6 @@ contract IfElse {
         else
             x -= 1;
         */
-    }
 
     function ternary(uint _x) external pure returns (uint) {
         /*
