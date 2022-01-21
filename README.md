@@ -1,2 +1,2 @@
 # learn-sol
-solidity practice
+solidity learning
