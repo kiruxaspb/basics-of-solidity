@@ -44,7 +44,7 @@ contract FuncModifier {
 }
 
 // input modifier
-contract checkinput {
+contract Checkinput {
     bool public pause;
     uint public count;
     
@@ -68,7 +68,7 @@ contract checkinput {
     }
 }
 
-contract sw {
+contract Sw {
     uint public count;
 
     modifier sandwich() {

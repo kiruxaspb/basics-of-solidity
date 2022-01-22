@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.11;
 
-contract construct {
+contract Construct {
     address public owner;
     uint public x;
 

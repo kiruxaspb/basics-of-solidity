@@ -5,7 +5,7 @@ pragma solidity ^0.8.11;
 // named output
 // destructuring assigment
 
-contract funcout {
+contract Funcout {
     function returnMany() public pure returns (uint, bool, uint) {
         return (1, true, 2);
     }

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.11;
 
-contract locAndstate {
+contract LocalAndstate {
     uint public myvar; // state variable
     bool public bl; // state variable
     address public myAddr;

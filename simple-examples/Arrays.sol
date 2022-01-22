@@ -5,7 +5,7 @@ pragma solidity ^0.8.11;
 // initial
 // insert (push), get, update, delete, pop, length
 
-contract arrays {
+contract Arrays {
     uint[] public dynamicArray = [1, 2, 3, 4, 5]; // dymanic, can initial here
     uint[3] public fixedArray = [4, 5, 6]; // fixed
     
