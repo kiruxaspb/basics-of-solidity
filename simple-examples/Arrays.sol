@@ -28,3 +28,13 @@ contract Arrays {
         return dynamicArray;
     }
 }
+
+pragma solidity ^0.8.11;
+
+contract Arraytest {
+    function inputArr(uint8[][] calldata _array) public pure returns (uint8[][] memory) { // or view
+        uint8[][] memory arr = new uint8[][](_array.length);
+        arr = _array;
+        return arr;
+    }
+}
