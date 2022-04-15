@@ -1,54 +1,51 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.11;
+pragma solidity ^0.8.13;
 
-//insert, update, read from array of structs
-contract TodoList {
-    uint256 public indexTodo = 0;
-    address owner;
-    mapping(uint256 => Todo) internal Tasks;
+contract Todo {
+    struct Task {
+    uint id;
+    uint date;
+    string content;
+    string author;
+    bool done;
+    uint dateComplete;
+    }
+    mapping(uint => Task) public tasks;
+    uint nextTaskId;
 
-    constructor() {
-        owner = msg.sender;
+    event TaskCreated(
+        uint id,
+        uint date,
+        string content,
+        string author,
+        bool done
+    );
+    event TaskStatusToggled(
+        uint id, 
+        bool done, 
+        uint date
+    );
+
+    function createTask(
+        string memory _content, 
+        string memory _author) 
+        external {
+        tasks[nextTaskId] = Task(nextTaskId, block.timestamp, _content, _author, false, 0);
+        emit TaskCreated(nextTaskId, block.timestamp, _content, _author, false);
+        nextTaskId++;
     }
 
-    modifier onlyOwner() { // 
-        require(msg.sender == owner); // return TRUE or FALSE
-        _;
+    function getTasks() external view returns(Task[] memory) {
+        Task[] memory _tasks = new Task[](nextTaskId);
+        for(uint i = 0; i < nextTaskId; i++) {
+            _tasks[i] = tasks[i];
+        }
+        return _tasks;
     }
 
-    struct Todo {
-        string text;
-        bool completed;
-    }
-
-    function addTask(string memory _text) internal onlyOwner {
-        Tasks[indexTodo] = (Todo(_text, false));
-        countTodo();
-    }
-
-    function countTodo() internal {
-        indexTodo += 1;
-    }
-
-    function deleteTask(uint256 _index) internal onlyOwner {
-        delete Tasks[_index];
-        Tasks[_index].text = "cleaned";
-        Tasks[_index].completed = false;
-        // make a deletion with a shift
-    }
-
-    function updateText(uint256 _index, string memory _text) internal onlyOwner {
-            Tasks[_index].text = _text;
-            // todo.text = _text;
-            // Todo storage todo = todos[_index]; >> cheaper by gas <<
-    }
-
-    function getTodo(uint256 _index) internal view onlyOwner returns (string memory, bool) {
-        Todo memory todo = Tasks[_index]; // can use storage -> a little cheaper of gas
-        return (todo.text, todo.completed);
-    }
-
-    function toggleCompleted(uint256 _index) internal onlyOwner { // changing the status of the task by index
-        Tasks[_index].completed = !Tasks[_index].completed;
+    function toggleDone(uint id) external {
+        Task storage task = tasks[id];
+        task.done = !task.done;
+        task.dateComplete = task.done ? block.timestamp : 0;
+        emit TaskStatusToggled(id, task.done, task.dateComplete);
     }
 }
